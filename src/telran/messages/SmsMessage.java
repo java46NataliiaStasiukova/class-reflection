@@ -1,6 +1,8 @@
 package telran.messages;
 public class SmsMessage implements Message {
-String phoneNumber;
+	//Usage: 0531231212
+	private static final String regex = "^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$";
+	String phoneNumber;
 
 	@Override
 	public void send(String text) {
@@ -11,6 +13,12 @@ String phoneNumber;
 	public SmsMessage(String phoneNumber) {
 		
 		this.phoneNumber = phoneNumber;
+	}
+
+	@Override
+	public String getRegex() {
+		
+		return regex;
 	}
 
 }
