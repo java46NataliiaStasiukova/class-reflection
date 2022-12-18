@@ -10,16 +10,15 @@ public PersonObj(String name, double salary, String email, String phoneNumber) {
 @Min(value = 3, message = "name length should be no less then 3 letters")
 @Max(value = 10, message = "name length should be no more them 10 letters")
 @NotEmpty(message = "name field cannot be empty")
-String name;
+private String name;
 @Min(value = 0, message = "salary value cannot be a negative value")
-double salary;
+private double salary;
 @Pattern(value ="^(?=.{1,64}@)[\\p{L}0-9\\+_-]+(\\.[\\p{L}0-9\\+_-]+)*@{0}"
         + "[^-][\\p{L}0-9\\+-]+(\\.[\\p{L}0-9\\+-]+)*(\\.[\\p{L}]{2,})$"
 		, message = "Email not correct")
-String email;
+private String email;
 @Pattern(value = "^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$",
 message = "phone number not correct")
-String phoneNumber;
-
+private String phoneNumber;
 	
 }

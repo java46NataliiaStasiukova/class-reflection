@@ -36,7 +36,7 @@ private static List<String> errorsMesg;
 						method.setAccessible(true);
 						method.invoke(Validator.class, value, field);	
 					} catch (Exception e) {
-						
+						System.out.println("Method for '" + value.getClass() + "'not exist");
 					}		
 				}
 			}
