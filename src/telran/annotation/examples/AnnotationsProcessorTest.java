@@ -3,7 +3,6 @@ package telran.annotation.examples;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
 
 class AnnotationsProcessorTest {
 
