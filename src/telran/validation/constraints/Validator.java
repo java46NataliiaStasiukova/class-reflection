@@ -9,10 +9,13 @@ public class Validator {
 private static List<String> errorsMesg;
 
 	
-	public static List<String> validate(Object obj) {
+	public static List<String> validate(Object obj) throws Exception {
 		Validator.errorsMesg = new ArrayList<>();
 		Field[] fields = obj.getClass().getDeclaredFields();
 		Object value = null;
+		if(fields.length == 0) {
+			throw new Exception("no fields found");
+		}
 		for(Field field: fields) {
 			field.setAccessible(true);
 			try {

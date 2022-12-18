@@ -17,13 +17,13 @@ class ValidatorTest {
 	private static final String PHONE_NUMBER_2 = "0505";
 
 	@Test
-	void validatorTest1() {
+	void validatorTest1() throws Exception {
 		PersonObj person = new PersonObj(NAME_1, SALARY_1, EMAIL_1, PHONE_NUMBER_1);
 		List<String> list = Validator.validate(person);
 		assertEquals(0, list.size());
 	}
 	@Test
-	void validatorTest2() {
+	void validatorTest2() throws Exception {
 		PersonObj person = new PersonObj(NAME_2, SALARY_2, EMAIL_2, PHONE_NUMBER_2);
 		List<String> list = Validator.validate(person);
 		for(String str: list) {
