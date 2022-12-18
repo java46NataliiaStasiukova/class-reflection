@@ -20,9 +20,6 @@ class ValidatorTest {
 	void validatorTest1() {
 		PersonObj person = new PersonObj(NAME_1, SALARY_1, EMAIL_1, PHONE_NUMBER_1);
 		List<String> list = Validator.validate(person);
-		for(String str: list) {
-			System.out.println(str);
-		}
 		assertEquals(0, list.size());
 	}
 	@Test

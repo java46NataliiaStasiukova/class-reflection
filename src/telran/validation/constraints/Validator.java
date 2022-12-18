@@ -9,7 +9,7 @@ public class Validator {
 private static List<String> errorsMesg;
 
 	
-	public static List<String> validate(Object obj) {//throws IllegalArgumentException, IllegalAccessException, NoSuchMethodException, SecurityException, InvocationTargetException{
+	public static List<String> validate(Object obj) {
 		Validator.errorsMesg = new ArrayList<>();
 		Field[] fields = obj.getClass().getDeclaredFields();
 		Object value = null;
@@ -18,9 +18,8 @@ private static List<String> errorsMesg;
 			try {
 				value = field.get(obj);
 			} catch (Exception e) {
-				System.out.println("1*******");
+				
 			}
-			
 			Annotation[] annotations = field.getAnnotations();
 			if(annotations.length != 0) {
 				for(Annotation annotation: annotations) {
@@ -34,12 +33,11 @@ private static List<String> errorsMesg;
 						method.setAccessible(true);
 						method.invoke(Validator.class, value, field);	
 					} catch (Exception e) {
-						System.out.println("2*******");
+						
 					}		
 				}
 			}
 		}
-		
 		return errorsMesg;
 	}
 	@SuppressWarnings("unused")
