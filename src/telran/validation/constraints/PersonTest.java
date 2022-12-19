@@ -1,11 +1,15 @@
 package telran.validation.constraints;
 
-public class PersonObj {
-public PersonObj(String name, double salary, String email, String phoneNumber) {
+import java.time.LocalDate;
+
+public class PersonTest {
+public PersonTest(String name, double salary, String email, String phoneNumber) {
 		this.name = name;
 		this.salary = salary;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
+		this.localDate = null;
+		this.character = '*';
 	}
 @Min(value = 3, message = "name length should be no less then 3 letters")
 @Max(value = 10, message = "name length should be no more them 10 letters")
@@ -20,5 +24,9 @@ private String email;
 @Pattern(value = "^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$",
 message = "phone number not correct")
 private String phoneNumber;
+@Pattern(value = "[A-Z][a-z]")
+LocalDate localDate;
+@Pattern(value = "[A-Z][a-z]")
+char character;
 	
 }

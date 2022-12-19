@@ -9,38 +9,36 @@ public class Validator {
 private static List<String> errorsMesg;
 
 	
-	public static List<String> validate(Object obj) throws Exception {
+	public static List<String> validate(Object obj) {//throws IllegalArgumentException, IllegalAccessException, NoSuchMethodException, SecurityException, InvocationTargetException{
 		Validator.errorsMesg = new ArrayList<>();
 		Field[] fields = obj.getClass().getDeclaredFields();
 		Object value = null;
-		if(fields.length == 0) {
-			throw new Exception("no fields found");
-		}
 		for(Field field: fields) {
 			field.setAccessible(true);
 			try {
 				value = field.get(obj);
 			} catch (Exception e) {
-				
-			}
+				System.out.println("1*******");
+			}	
 			Annotation[] annotations = field.getAnnotations();
 			if(annotations.length != 0) {
 				for(Annotation annotation: annotations) {
 					String annName = annotation.annotationType().getSimpleName().toLowerCase();
 					Method method = null;
 					try {
-						if(value == null) {
+						if(value == null && field.getType().equals(String.class)) {
 							value = "";
 						}
 						method = Validator.class.getDeclaredMethod(annName, value.getClass(), Field.class);
 						method.setAccessible(true);
 						method.invoke(Validator.class, value, field);	
 					} catch (Exception e) {
-						System.out.println("Method for '" + value.getClass() + "'not exist");
+						errorsMesg.add("type '" + field.getType().getSimpleName() + "' is not operabable for this validator");
 					}		
 				}
 			}
 		}
+		
 		return errorsMesg;
 	}
 	@SuppressWarnings("unused")
@@ -86,3 +84,4 @@ private static List<String> errorsMesg;
 		}
 	}
 }
+

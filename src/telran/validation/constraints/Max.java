@@ -7,8 +7,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 @Retention(RUNTIME)
-@Target(FIELD)
+@Target({ TYPE, FIELD })
 public @interface Max {
 	double  value();
-	String message() default " should be no more then: ";
+	String message() default "Maximal constraint violation";
 }

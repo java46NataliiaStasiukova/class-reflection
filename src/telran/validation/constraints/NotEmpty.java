@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 @Target(FIELD)
 public @interface NotEmpty {
 	
-	String message() default "Pattern constraint violation";
+	String message() default "Violation not empty constraint";
 
 }
