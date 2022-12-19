@@ -1,26 +1,24 @@
 package telran.messages;
 
-public class EmailMessage implements Message{
+import telran.messagesAppl.InputOutput;
+
+public class EmailMessage implements MessageSender{
 	//Usage: telran@java.com
-	private static final String regex = "^(?=.{1,64}@)[\\p{L}0-9\\+_-]+(\\.[\\p{L}0-9\\+_-]+)*@{0}"
-	        + "[^-][\\p{L}0-9\\+-]+(\\.[\\p{L}0-9\\+-]+)*(\\.[\\p{L}]{2,})$";
-	String emailAddress;
-
 	@Override
-	public void send(String text) {
-		System.out.printf("email message '%s' has been sent to email address %s\n", text, emailAddress );
-
+	public void send(InputOutput io, String message) {
+		String email = io.readPredicate("Enter email message to be send", "Email not correct",
+				p -> p.matches(getRegex()));
+		io.writeObject(email);
+		System.out.printf("\nemail message '%s' has been sent to email address %s\n", message, email);
+		
 	}
 
-	public EmailMessage(String emailAddress) {
-		
-		this.emailAddress = emailAddress;
-	}
-
-	@Override
-	public String getRegex() {
-		
+	private String getRegex() {
+		String regex = "^(?=.{1,64}@)[\\p{L}0-9\\+_-]+(\\.[\\p{L}0-9\\+_-]+)*@{0}"
+		        + "[^-][\\p{L}0-9\\+-]+(\\.[\\p{L}0-9\\+-]+)*(\\.[\\p{L}]{2,})$";
 		return regex;
 	}
+
+
 
 }

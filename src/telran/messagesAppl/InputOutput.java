@@ -22,7 +22,7 @@ public interface InputOutput {
 				res = (Class<R>) Class.forName(reference + str);
 				break;
 			} catch (Exception e) {
-				writeLine(errorPrompt + " " + reference+str);//e.getMessage());
+				writeLine(errorPrompt + " " + reference+str);
 			}
 		}
 		

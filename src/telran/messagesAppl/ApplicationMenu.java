@@ -1,16 +1,14 @@
 package telran.messagesAppl;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-
-import telran.messages.Message;
+import telran.messages.MessageSender;
 
 public class ApplicationMenu {
 	static final String CLASS_REF = "telran.messages.";
 	static String regex;
 	static String input[] = new String[2];
-	static Constructor<Message> constructor;
-	static Message message;
+	static Constructor<MessageSender> constructor;
+	static MessageSender message;
 public static void main(String[] args) {
 
 		Menu menu = new Menu("Message sender", getItems());
@@ -25,29 +23,23 @@ public static void main(String[] args) {
 	}
 	
 	static void sendMessage(InputOutput io) {
-		Class<Message> clazz  = io.readClass("Enter message type", 
+		Class<MessageSender> clazz  = io.readClass("Enter message type;"
+				+ " usage: EmailMessage, SmsMessage, TcpMessage.", 
 				"Wrong type: ", CLASS_REF);
 		try {
-			constructor = clazz.getConstructor(String.class);
-			Field field = clazz.getDeclaredField("regex");
-			field.setAccessible(true);
-			Object value = field.get(clazz);
-			regex = (String) value;
+			constructor = clazz.getConstructor();
 		} catch (Exception e) {
-			System.out.println("Error");
+			System.out.println("Error-1");
 		}	
 		io.writeObject(clazz.getName() + "\n");
 		input[0] = io.readString("Enter message to be send");
 		io.writeObject(input[0] + "\n");
-		input[1] = io.readPredicate("Enter direction message to be send", "Wrong message direction!", 
-				(p) -> p.matches(regex.toString()));
 		try {
-			message = constructor.newInstance(input[1]);
+			message = constructor.newInstance();
 		} catch (Exception e) {
-			System.out.println("Wrong direction");
+			System.out.println("Error-2");
 		}
-		io.writeObject(input[1]+ "\n");
-		message.send(input[0]);
+		message.send(io, input[0]);
 }
 	
 }

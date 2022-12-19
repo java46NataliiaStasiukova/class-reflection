@@ -1,24 +1,23 @@
 package telran.messages;
-public class SmsMessage implements Message {
+
+import telran.messagesAppl.InputOutput;
+
+public class SmsMessage implements MessageSender {
 	//Usage: 0531231212
-	private static final String regex = "^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$";
-	String phoneNumber;
-
 	@Override
-	public void send(String text) {
-		System.out.printf("sms message '%s' has been sent to phone %s\n", text, phoneNumber );
-
+	public void send(InputOutput io, String message) {
+		String phoneNumber = io.readPredicate("Enter phone number", "Phone number not correct", 
+				p -> p.matches(getRegex()));
+		io.writeObject(phoneNumber);
+		System.out.printf("\nsms message '%s' has been sent to phone %s\n", message, phoneNumber );
+		
 	}
 
-	public SmsMessage(String phoneNumber) {
-		
-		this.phoneNumber = phoneNumber;
-	}
-
-	@Override
-	public String getRegex() {
-		
+	private String getRegex() {
+		String regex = "^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$";
 		return regex;
 	}
+
+
 
 }
